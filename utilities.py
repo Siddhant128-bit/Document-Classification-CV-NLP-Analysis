@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np 
 import matplotlib.pyplot as plt
 import json
+from sklearn.utils.class_weight import compute_class_weight
 
 def dump_load_map(map,flag):
     if flag==0:
@@ -86,8 +87,9 @@ def plot_metrics_for_training(history):
     #plt.xticks(np.arange(len(history['val_accuracy'])), np.arange(1, len(history['val_accuracy'])+1))
     plt.xlabel('Epoch')
     plt.ylabel('val_accuracy')
-    plt.ylim([0.0, 1.00])
+    plt.ylim([0.0, 1.10])
     plt.legend(loc='lower right')
+    plt.savefig('Accuracy_history.jpg')
 
     plt.figure(figsize=(30, 10))
     plt.plot(history['loss'], label='loss')
@@ -98,6 +100,7 @@ def plot_metrics_for_training(history):
     plt.ylabel('val_loss')
     plt.ylim([0, 1.5])
     plt.legend(loc='lower right')
+    plt.savefig('Loss_History.jpg')
 
 
 
@@ -110,6 +113,12 @@ def get_images_array(X):
         images_output.append(img)
     
     return np.asarray(images_output)
+
+def get_class_weights(Y):
+    y_integers = np.argmax(Y, axis=1)
+    class_weights = compute_class_weight(class_weight='balanced', classes=np.unique(y_integers), y=y_integers)
+    d_class_weights = dict(enumerate(class_weights))
+    return d_class_weights
 
 if __name__=='__main__':
     #prepare_dataset('../Dataset/Medline','Medicine')
