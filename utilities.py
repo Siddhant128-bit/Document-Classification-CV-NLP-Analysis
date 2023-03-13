@@ -79,7 +79,11 @@ def prepare_all_dataset(path_to_dataset):
     return images_list,vendors_list,vendor_map
 
 def plot_metrics_for_training(history):
-    
+    try:
+        os.mkdir('History_Graphs')
+    except:
+        pass
+
     plt.figure(figsize=(30, 10))
     plt.plot(history['accuracy'], label='accuracy')
     plt.plot(history['val_accuracy'], label = 'val_accuracy')
@@ -89,7 +93,7 @@ def plot_metrics_for_training(history):
     plt.ylabel('val_accuracy')
     plt.ylim([0.0, 1.10])
     plt.legend(loc='lower right')
-    plt.savefig('Accuracy_history.jpg')
+    plt.savefig('History_Graphs/Accuracy_history.jpg')
 
     plt.figure(figsize=(30, 10))
     plt.plot(history['loss'], label='loss')
@@ -100,7 +104,7 @@ def plot_metrics_for_training(history):
     plt.ylabel('val_loss')
     plt.ylim([0, 1.5])
     plt.legend(loc='lower right')
-    plt.savefig('Loss_History.jpg')
+    plt.savefig('History_Graphs/Loss_History.jpg')
 
 
 
