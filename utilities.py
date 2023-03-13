@@ -102,7 +102,7 @@ def plot_metrics_for_training(history):
     #plt.xticks(np.arange(len(history['val_accuracy'])), np.arange(1, len(history['val_accuracy'])+1))
     plt.xlabel('Epoch')
     plt.ylabel('val_loss')
-    plt.ylim([0, 1.5])
+    plt.ylim([0,3.5])
     plt.legend(loc='lower right')
     plt.savefig('History_Graphs/Loss_History.jpg')
 
