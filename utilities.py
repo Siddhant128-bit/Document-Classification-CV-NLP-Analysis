@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import json
 from sklearn.utils.class_weight import compute_class_weight
+import tensorflow as tf
 
 def dump_load_map(map,flag):
     if flag==0:
@@ -123,6 +124,20 @@ def get_class_weights(Y):
     class_weights = compute_class_weight(class_weight='balanced', classes=np.unique(y_integers), y=y_integers)
     d_class_weights = dict(enumerate(class_weights))
     return d_class_weights
+
+def inference_testing_model(model_name,map,path_pdf):
+    loaded_model=tf.keras.models.load_model('Efficient_net_custom.h5')
+    map=dump_load_map({},1)
+    #print(f'File Uploaded: {path_pdf}')
+    test_img=inference_image_get(path_pdf)
+    preds=loaded_model.predict(test_img.reshape(1,test_img.shape[0],test_img.shape[1],test_img.shape[2]))
+    op=np.argmax(preds)
+    
+    if list(preds[0])[op]<=0.6:
+        return 'This file belongs to none of the vendors '
+    else: 
+        return f'This file belongs to {list(filter(lambda x: map[x] == op, map))[0]}'
+
 
 if __name__=='__main__':
     #prepare_dataset('../Dataset/Medline','Medicine')
