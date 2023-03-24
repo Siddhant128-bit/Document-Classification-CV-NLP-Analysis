@@ -1,0 +1,18 @@
+{
+    "DHL_T1":"Invoice",
+    "DHL_T2":"Tax Invoice",
+    "DHL_T3":"Credit Memo",
+    "DHL_T5":"Account Statement",
+    "DHL_T6":"Debit Memo",
+    "SLACK_T1":"Customer Invoice",
+    "SLACK_T2":"Monthly Summary",
+    "SLACK_T3":"Receipt",
+    "SLACK_T4":"Statement",
+    "SLACK_T5":"Receipt",
+    "SLACK_T6":"Invoice",
+    "SLACK_T7":"Invoice",
+    "ULINE_T1":"Credit Memo",
+    "ULINE_T2":"Receipt",
+    "ULINE_T3":"Invoice"
+    
+}
